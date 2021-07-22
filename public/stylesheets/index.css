@@ -1,0 +1,75 @@
+#list {
+    margin: 0;
+    padding: 0;
+}
+#list a {
+    text-decoration: none;
+}
+#list li{
+    list-style: none;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    font-size: 14px;
+    border-top: 1px solid #f0f0f0;
+}
+#list .count_of_replies {
+    color: #9e78c0;
+}
+#list .reply_count {
+    width: 70px;
+    text-align: center
+}
+#list .count_seperator {
+    margin: 0 2px;
+    font-size: 10px;
+}
+#list .count_of_visits {
+    font-size: 10px;
+    color: #b4b4b4;
+}
+#list .avatars_wrapper {
+    width: 30px;
+    height: 30px;
+}
+#list .avatars {
+    width: 30px;
+    height: 30px;
+    border-radius: 3px;
+}
+#list .avatars.small {
+    width: 18px;
+    height: 18px;
+}
+#list .avatars.small {
+    width: 18px;
+    height: 18px;
+}
+#list a.title {
+    color: #333;
+    font-size: 16px;
+}
+#list a.title:hover {
+    text-decoration: underline;
+}
+#list .tag {
+    background-color: #e5e5e5;
+    color: #999;
+    padding: 0px 4px;
+    border-radius: 3px;
+    font-size: 12px;
+    margin: 0 5px 0 0;
+}
+#list .tag.top {
+    background: #80bd01;
+    color: #fff;
+}
+#list .last_time {
+    margin-left: 20px;
+    font-size: 11px;
+    color: #778087;
+    text-align: right;
+    white-space: nowrap;
+}
+#list .last_time .last_active_time {
+    min-width: 50px;
+}

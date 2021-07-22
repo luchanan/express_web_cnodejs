@@ -1,0 +1,64 @@
+doctype html
+html
+  head
+    block title
+      title= title
+    meta(http-equiv='X-UA-Compatible' content='IE=edge')
+    meta(name="renderer" content="webkit")
+    meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no')
+    meta(name="keyword" content="")
+    meta(name="description" content="")
+    link(rel='stylesheet', href='/stylesheets/base.css')
+    link(rel='stylesheet', href='/stylesheets/iconfont/iconfont.css')
+    link(href="//cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet")
+    //- link(rel='stylesheet', href='//www.layuicdn.com/layui-v2.6.8/css/layui.css')
+    //block可以使得其他页面扩展
+    block head
+  body
+    section#sticky
+      block header
+        include header
+      main.main.max_width(flex="main:justify box:last")
+        .left_main
+          block content
+        block sidebar
+          include sidebar
+    block footer
+      include footer
+    //- script(src='//www.layuicdn.com/layui-v2.6.8/layui.js')
+    <!--[if lt IE9]>
+    script(src='//cdn.bootcdn.net/ajax/libs/html5shiv/r29/html5.min.js')
+    <![endif]-->
+    script(src='//cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js')
+    script(src='/javascripts/utils/tools.js')
+    script
+      - var ENV = process.env.ENV
+      .
+        window.ENV = "#{ENV}"
+    script
+      if ENV == 'local'
+        .
+          window.CONFIG = {
+            "baseURL": "http://192.168.3.168"
+          }
+      else if ENV == 'dev'
+        .
+          window.CONFIG = {
+            "baseURL": "http://192.168.3.169"
+          }
+      else if ENV == 'sit'
+        .
+          window.CONFIG = {
+            "baseURL": "http://192.168.3.172"
+          }
+      else if ENV == 'prod'
+        .
+          window.CONFIG = {
+            "baseURL": "http://192.168.3.173"
+          }
+    script.
+      axios.create({
+        baseURL: window.CONFIG.baseURL,
+        timeout: 5000
+      })
+    block footer_script

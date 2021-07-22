@@ -1,0 +1,15 @@
+header
+  .navbar_inner.min_width.max_width(flex="main:justify")
+    div(flex="cross:center")
+      a.logo(href="/")
+        img(src="/images/cnodejs_light.svg")
+      form.hidden-xs.navbar_search(action="/search")
+        .input
+          i.iconfont.icon-search
+          input.search_query(type="text" id="q" name="q" value="")
+    ul.nav.hidden-xs.hidden-sm
+      - var list = ["首页", "新手入门", "API", "关于我们", "登录"]
+      each item in list
+        li
+          a(href="")= item
+    

@@ -1,0 +1,51 @@
+extends layout/index
+//- 设置login的样式
+//- 不要footer和header
+block head
+ link(rel="stylesheet", href="/stylesheets/login.css")
+block header
+block footer
+block content
+  .login_body
+    form.login_form.layui-form(lay-filter="form")
+      div.layui-form-item
+        label.layui-form-label 用户名
+        div.layui-input-block
+          input.layui-input(type="text" name="name" lay-verify="name" autocomplete="off" placeholder="请输入用户名")
+      div.layui-form-item
+        label.layui-form-label 密码
+        div.layui-input-block
+          input.layui-input(type="password" name="password" lay-verify="password" autocomplete="off" placeholder="请输入密码")
+      div.layui-form-item
+        label.layui-form-label
+        div.layui-input-block
+          button(type="submit" class="layui-btn" lay-submit="" lay-filter="submit_form") 登录
+block footer_script
+  script.
+    //- script.后，写你客户端代码
+    layui.use(['form'], function(){
+      var form = layui.form
+      ,layer = layui.layer
+      //自定义验证规则
+      form.verify({
+        name: function(value){
+          if(!/\S/.test(value)){
+            return '请输入用户名';
+          }
+        }
+        ,password: [
+          /^[\S]{6,12}$/
+          ,'密码必须6到12位，且不能出现空格'
+        ]
+      });
+      //监听提交
+      form.on('submit(submit_form)', function(data){
+        axios.post('user/staff/home/home').then(function (res) {
+          console.log(res)
+        })
+        layer.alert(JSON.stringify(data.field), {
+          title: '最终的提交信息'
+        })
+        return false
+      });
+    })
