@@ -6,10 +6,19 @@ header
       form.hidden-xs.navbar_search(action="/search")
         .input
           i.iconfont.icon-search
-          input.search_query(type="text" id="q" name="q" value="")
-    ul.nav.hidden-xs.hidden-sm
-      - var list = ["首页", "新手入门", "API", "关于我们", "登录"]
+          input.search_query(type="text" name="q" value="")
+    .right(flex="main:justify cross:center")
+      ul.nav.hidden-xs.hidden-sm
+        - var listUnLogin = [{text: '首页', url: '/'}, {text: '新手入门', url: 'https://cnodejs.org/getstart'}, {text: 'API', url: 'https://cnodejs.org/api'}, {text: '关于', url: 'https://cnodejs.org/about'}, {text: '注册', url: '/register'}, {text: '登录', url: '/login'}]
+        - var listLogin = [{text: '首页', url: '/'}, {text: '未读消息', url: '/my/messages'}, {text: '新手入门', url: 'https://cnodejs.org/getstart'}, {text: 'API', url: 'https://cnodejs.org/api'}, {text: '关于', url: 'https://cnodejs.org/about'}, {text: '设置', url: '/setting'} , {text: '退出', url: '/signout'}]
+        - var list = isLogin ? listLogin : listUnLogin
+        each item in list
+          li
+            a(href=item.url)= item.text
+      .expand.visible-xs.visible-sm
+        i.icon-expand.iconfont
+  #right_menu(style={display: "none"})
+    ul
       each item in list
-        li
-          a(href="")= item
-    
+          li
+            a(href=item.url)= item.text

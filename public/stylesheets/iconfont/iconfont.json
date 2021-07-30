@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "6987097",
+      "name": "reply",
+      "font_class": "reply",
+      "unicode": "e961",
+      "unicode_decimal": 59745
+    },
+    {
+      "icon_id": "349019",
+      "name": "thumbs-o-up",
+      "font_class": "like",
+      "unicode": "ecd7",
+      "unicode_decimal": 60631
+    },
+    {
+      "icon_id": "19233227",
+      "name": "更多",
+      "font_class": "expand",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
       "icon_id": "745701",
       "name": "search",
       "font_class": "search",

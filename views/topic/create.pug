@@ -1,0 +1,98 @@
+extends ../layout/index
+block head
+  link(rel='stylesheet', href='//www.layuicdn.com/layui-v2.6.8/css/layui.css')
+  link(rel='stylesheet', href='/javascripts/editor/simplemde.min.css')
+block content
+  .pannel_header
+      ul.breadcrumb.clearfix
+        li
+          a(href="/") 主页
+          <span class="divider">/</span>
+        li.active
+          a(href="javascript::") #{type == 'add' ? '发布' : '编辑'}话题
+  .inner.padding10
+    form.layui-form(lay-filter="form")
+      div.layui-form-item
+        label.layui-form-label 选择版块：
+        div.layui-input-block
+          select(name="tab" lay-verify="required")
+            option(value="") 请选择
+            option(value="share" selected=data.tab == "share") 分享
+            option(value="ask" selected=data.tab == "ask") 问答
+            option(value="job" selected=data.tab == "job") 招聘
+            option(value="dev" selected=data.tab == "dev") 客户端测试
+      div.layui-form-item
+        label.layui-form-label
+        div
+          input.layui-input(value=data.title type="text" name="title" lay-verify="title" autocomplete="off" placeholder="标题字数 10 字以上")
+      div.layui-form-item
+        div
+          textarea#markdown(name="content") !{data.content}
+      div.layui-form-item
+        div
+          button(class="layui-btn layui-btn-normal" lay-submit lay-filter="submit_form") 提交
+          button(type="reset" class="layui-btn layui-btn-primary") 重置
+block footer_script
+  script(src='//www.layuicdn.com/layui-v2.6.8/layui.js')
+  script(src='/javascripts/editor/simplemde.min.js')
+  script
+    .
+      var simplemde = new SimpleMDE({ element: document.getElementById("markdown") });
+      var type = '#{type}'
+      var topic_id = '#{data.id}'
+    |
+    |
+    .
+      layui.use(['form'], function(){
+        var form = layui.form, layer = layui.layer
+        //自定义验证规则
+        form.verify({
+          tab: function(value, item){
+            if(!/\S/.test(value)){
+              return '请选择模块';
+            }
+          }
+          ,title: function(value, item){
+            if(!/\S/.test(value)){
+              return '标题不能为空';
+            }
+          }
+          ,content: function(value, item){
+            if(!/\S/.test(value)){
+              return '内容不能为空';
+            }
+          }
+        });
+        //监听提交
+        form.on('submit(submit_form)', function(data){
+          var params = {
+            //- accesstoken: '',
+            tab: data.field.tab,
+            title: data.field.title,
+            content: simplemde.value()
+          }
+          if (type == 'add') {
+            axios.post('/topics', params).then(function (res) {
+              layer.alert('操作成功！', {
+                title: '提示'
+              })
+            }).catch(function(res) {
+              layer.alert(res.response.data.message, {
+                title: '提示'
+              })
+            })
+          } else {
+            params.topic_id = topic_id
+            axios.post('/updateTopic', params).then(function (res) {
+              layer.alert('操作成功！', {
+                title: '提示'
+              })
+            }).catch(function(res) {
+              layer.alert(res.response.data.message, {
+                title: '提示'
+              })
+            })
+          }
+          return false
+        });
+      })

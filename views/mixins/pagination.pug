@@ -1,0 +1,9 @@
+//- Pagination
+mixin pagination(url, page = 1)
+    nav.pagination
+        ul.pager(flex="cross:center main:justify")
+            li.previous(class={disabled: page == 1})
+                a(href=page == 1 ? 'javascript:;' : (url + '&page=' + (page == 1 ? 1 : +page - 1))) 上一页
+            li.next
+                a(href=url + '&page=' + (+page + 1)) 下一页
+            

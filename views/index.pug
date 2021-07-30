@@ -2,25 +2,32 @@ extends layout/index
 block head
   link(rel='stylesheet', href='/stylesheets/index.css')
 block content
-  nav#nav.clearfix
-    - var list = {all: '全部', good: '精华', share: '分享', ask: '问答', job: '招聘', dev: '客户端测试'}
-    each val, key in list
-      li
-        a(href="/?tab=" + key)= val
-  ul#list
-    each item in data
-      li(flex="main:justify cross:center")
-        .left(flex="cross:center")
+  nav#nav.pannel_header
+    ul.clearfix
+      - var list = {all: '全部', good: '精华', share: '分享', ask: '问答', job: '招聘', dev: '客户端测试'}
+      each val, key in list
+        li
+          a(href="/?tab=" + key class={current_tab: type == key})= val
+  .inner
+    ul#list
+      each item in data
+        li
           a.avatars_wrapper(href="" title=item.author.loginname)
-            img.avatars(src=item.author.avatar_url alt=item.author.loginname)
-          span.reply_count
-            span.count_of_replies(title="回复数") #{item.reply_count}
-            span.count_seperator /
-            span.count_of_visits(title="点击数") #{item.visit_count}
-          - var tag = ['tag', {top: item.top || item.good}]
-          span(class=tag) #{item.top ? '置顶' : (item.good ? '精华' : item.tab ? list[item.tab] : '未知')}
-          a.title(href="") #{item.title}
-        a.last_time(href="" flex="cross:center")
-          img.avatars.small(src=item.author.avatar_url alt="")
-          span.last_active_time #{item.last_reply_at}
+            img.avatars(src=item.author.avatar_url alt='')
+          .right.clearfix
+            .space_left
+              - var tag = ['tag', {top: item.top || item.good}]
+              span(class=tag) #{item.top ? '置顶' : (item.good ? '精华' : item.tab ? list[item.tab] : '未知')}
+              a.title(href='/topic/' + item.id) #{item.title}
+            .space_right
+              a.last_time(href="")
+                img.avatars.small(src=item.author.avatar_url alt="")
+                span.last_active_time #{item.last_reply_at}
+              span.reply_count
+                span.count_of_replies(title="回复数") #{item.reply_count}
+                span.count_seperator /
+                span.count_of_visits(title="点击数") #{item.visit_count}
+    include mixins/pagination
+    +pagination('/?tab=' + type, page)
+        
       

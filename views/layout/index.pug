@@ -8,10 +8,10 @@ html
     meta(name='viewport', content='width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no')
     meta(name="keyword" content="")
     meta(name="description" content="")
+    link(rel="icon" type="image/x-icon" href="/favicon.ico?v=1.0")
     link(rel='stylesheet', href='/stylesheets/base.css')
     link(rel='stylesheet', href='/stylesheets/iconfont/iconfont.css')
     link(href="//cdn.bootcdn.net/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet")
-    //- link(rel='stylesheet', href='//www.layuicdn.com/layui-v2.6.8/css/layui.css')
     //block可以使得其他页面扩展
     block head
   body
@@ -25,7 +25,6 @@ html
           include sidebar
     block footer
       include footer
-    //- script(src='//www.layuicdn.com/layui-v2.6.8/layui.js')
     <!--[if lt IE9]>
     script(src='//cdn.bootcdn.net/ajax/libs/html5shiv/r29/html5.min.js')
     <![endif]-->
@@ -39,7 +38,7 @@ html
       if ENV == 'local'
         .
           window.CONFIG = {
-            "baseURL": "http://192.168.3.168"
+            "baseURL": "https://cnodejs.org/api/v1"
           }
       else if ENV == 'dev'
         .
@@ -57,8 +56,8 @@ html
             "baseURL": "http://192.168.3.173"
           }
     script.
-      axios.create({
-        baseURL: window.CONFIG.baseURL,
-        timeout: 5000
-      })
+      //- axios.create({
+      //-   baseURL: window.CONFIG.baseURL,
+      //-   timeout: 5000
+      //- })
     block footer_script

@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
 }
+#list .right {
+    margin-left: 40px;
+}
 #list a {
     text-decoration: none;
 }
@@ -11,13 +14,15 @@
     padding: 10px 10px 10px 10px;
     font-size: 14px;
     border-top: 1px solid #f0f0f0;
+    position: relative;
 }
 #list .count_of_replies {
     color: #9e78c0;
 }
 #list .reply_count {
     width: 70px;
-    text-align: center
+    float: left;
+    text-align: left;
 }
 #list .count_seperator {
     margin: 0 2px;
@@ -27,41 +32,14 @@
     font-size: 10px;
     color: #b4b4b4;
 }
-#list .avatars_wrapper {
-    width: 30px;
-    height: 30px;
-}
-#list .avatars {
-    width: 30px;
-    height: 30px;
-    border-radius: 3px;
-}
-#list .avatars.small {
-    width: 18px;
-    height: 18px;
-}
-#list .avatars.small {
-    width: 18px;
-    height: 18px;
-}
 #list a.title {
     color: #333;
-    font-size: 16px;
+    font-size: 14px;
+    vertical-align: middle;
+    word-break: break-all;
 }
 #list a.title:hover {
     text-decoration: underline;
-}
-#list .tag {
-    background-color: #e5e5e5;
-    color: #999;
-    padding: 0px 4px;
-    border-radius: 3px;
-    font-size: 12px;
-    margin: 0 5px 0 0;
-}
-#list .tag.top {
-    background: #80bd01;
-    color: #fff;
 }
 #list .last_time {
     margin-left: 20px;
@@ -69,7 +47,33 @@
     color: #778087;
     text-align: right;
     white-space: nowrap;
+    float: right;
 }
 #list .last_time .last_active_time {
-    min-width: 50px;
+    min-width: 60px;
+    display: inline-block;
+    vertical-align: middle;
+}
+@media (min-width: 768px) {
+    #list .space_right {
+        position: absolute;
+        top: 15px;
+        left: 40px;
+        right: 10px;
+    }
+    #list .right {
+        margin-left: 30px;
+    }
+    #list a.title {
+        font-size: 16px;
+    }
+    #list .space_left {
+        margin: 0 80px 0 70px;
+        padding: 4px 0;
+        position: relative;
+        z-index: 2;
+    }
+    #list .reply_count {
+        text-align: center;
+    }
 }

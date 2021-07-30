@@ -1,0 +1,44 @@
+extends layout/index
+block head
+  link(rel='stylesheet', href='/stylesheets/detail.css')
+block content
+  section.inner
+    - var list = {all: '全部', good: '精华', share: '分享', ask: '问答', job: '招聘', dev: '客户端测试'}
+    h1.title.padding_l_r
+      - var tag = ['tag', {top: data.top || data.good}]
+      span(class=tag) #{data.top ? '置顶' : (data.good ? '精华' : data.tab ? list[data.tab] : '未知')}
+      =data.title
+    div.sumary.padding_l_r.gray(flex="cross:center main:justify")
+      div
+        span.circle 发布于 #{data.create_at}
+        span.circle 作者 
+          a(href="") #{data.author.loginname}
+        span.circle #{data.visit_count} 次浏览
+        span.circle 来自 #{list[data.tab]}
+      if isLogin
+        if data.is_collect
+          a.green_button(href="/topic_collect/de_collect" class={disabled: data.is_collect}) 取消收藏
+        else
+          a.green_button(href="/topic_collect/collect") 收藏
+    div.content.padding_l_r
+      !=data.content
+    .reply
+      div.title.padding_l_r #{data.reply_count} 回复
+      ul
+        each item, index in data.replies
+          li.padding_l_r
+            div(flex="cross:center main:justify")
+              div(flex="cross:center")
+                a.avatars_wrapper(href="" title=item.author.loginname)
+                  img.avatars(src=item.author.avatar_url alt=item.author.loginname)
+                a.name(href="") #{item.author.loginname}
+                a.blue(href="") #{index + 1}楼•#{item.create_at}
+              div
+                span.like(data-likes=item.ups.length)
+                  i.iconfont.icon-like(class={on: isLogin ? item.ups.includes(userInfo.id) : false}) #{item.ups.length}
+                span.reply_btn
+                  i.iconfont.icon-reply
+            div.reply_content
+              !=item.content
+        
+      
